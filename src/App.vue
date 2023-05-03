@@ -27,11 +27,11 @@
         </label>
         <div class="flex flex-col">
           <button
-            :disabled="state.uploading || !this.state.files.length"
+            :disabled="uploading || !this.state.files.length"
             class="max-w-screen-lg w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 rounded-t text-sm font-medium text-gray-300 disabled:bg-blue-950"
             @click="uploadFiles()"
           >
-            {{ state.uploading ? 'Uploading...' : 'Upload' }}
+            {{ uploading ? 'Uploading...' : 'Upload' }}
           </button>
           <button
             :disabled="uploading"
@@ -105,7 +105,7 @@
             </div>
             <button
               class="text-red-500 hover:text-red-400 transition-colors duration-300 w-8 h-8 rounded-full flex items-center justify-center"
-              v-if="!state.uploading"
+              v-if="!uploading"
               @click="removeFile(index)"
             >
               <svg
@@ -172,11 +172,12 @@ export default {
       state: {
         files: [],
         uploaded: [],
-        uploading: false,
+
         expiry: '432000',
         urllen: '5',
         showOptions: false
-      }
+      },
+      uploading: false
     }
   },
   created() {
@@ -198,7 +199,6 @@ export default {
       this.state = {
         files: [],
         uploaded: [],
-        uploading: false,
         expiry: '432000',
         urllen: '5'
       }
@@ -214,7 +214,7 @@ export default {
       this.state.files.splice(index, 1)
     },
     async uploadFiles() {
-      this.state.uploading = true
+      this.uploading = true
       const formData = new FormData()
       const expiry = this.state.expiry
       const url_len = this.state.urllen
@@ -238,7 +238,7 @@ export default {
           console.error(`Error uploading file ${i + 1}: ${error}`)
         }
       }
-      this.state.uploading = false
+      this.uploading = false
     }
   }
 }
