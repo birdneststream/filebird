@@ -27,7 +27,7 @@
         </label>
         <div class="flex flex-col">
           <button
-            :disabled="uploading || !this.state.files.length"
+            :disabled="uploading || !this.files.length"
             class="max-w-screen-lg w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 rounded-t text-sm font-medium text-gray-300 disabled:bg-blue-950"
             @click="uploadFiles()"
           >
@@ -78,9 +78,9 @@
         </div>
 
         <input id="file-upload" type="file" class="hidden" multiple @change="handleFileUpload" />
-        <div v-if="state.files.length" class="space-y-2 overflow-y-scroll">
+        <div v-if="files.length" class="space-y-2 overflow-y-scroll">
           <div
-            v-for="(file, index) in state.files"
+            v-for="(file, index) in files"
             :key="index"
             class="flex items-center justify-between bg-gray-800 rounded-md py-2 px-4"
           >
@@ -170,14 +170,13 @@ export default {
   data() {
     return {
       state: {
-        files: [],
         uploaded: [],
-
         expiry: '432000',
         urllen: '5',
         showOptions: false
       },
-      uploading: false
+      uploading: false,
+      files: []
     }
   },
   created() {
@@ -197,7 +196,6 @@ export default {
   methods: {
     resetState() {
       this.state = {
-        files: [],
         uploaded: [],
         expiry: '432000',
         urllen: '5'
@@ -207,18 +205,18 @@ export default {
       const files = event.target.files
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
-        this.state.files.push(file)
+        this.files.push(file)
       }
     },
     removeFile(index) {
-      this.state.files.splice(index, 1)
+      this.files.splice(index, 1)
     },
     async uploadFiles() {
       this.uploading = true
       const formData = new FormData()
       const expiry = this.state.expiry
       const url_len = this.state.urllen
-      let files = [...this.state.files]
+      let files = [...this.files]
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
         formData.append('file', file)
@@ -233,7 +231,7 @@ export default {
 
           const data = await response.text()
           this.state.uploaded.push({ file: file.name, response: data.trim() })
-          this.state.files.shift()
+          this.files.shift()
         } catch (error) {
           console.error(`Error uploading file ${i + 1}: ${error}`)
         }
