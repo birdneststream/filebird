@@ -213,11 +213,11 @@ export default {
     },
     async uploadFiles() {
       this.uploading = true
-      const formData = new FormData()
       const expiry = this.state.expiry
       const url_len = this.state.urllen
       let files = [...this.files]
       for (let i = 0; i < files.length; i++) {
+        const formData = new FormData()
         const file = files[i]
         formData.append('file', file)
         formData.append('expiry', expiry)
