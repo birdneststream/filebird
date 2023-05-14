@@ -5,9 +5,88 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filehole.org - Upload your files in my hole</title>
+    <link rel="stylesheet" href="/assets/index-175756e5.css">
+    <script type="module" crossorigin src="/assets/index-eb9aede5.js"></script>
+    <noscript>
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                body {
+                    background: black !important;
+                    color: white !important;
+                }
+            }
+
+            @media (prefers-color-scheme: light) {
+                body {
+                    background: white !important;
+                    color: black !important;
+                }
+            }
+
+            .container {
+              padding-right: 15px;
+              padding-left: 15px;
+              margin-right: auto;
+              margin-left: auto;
+            }
+            @media (min-width: 768px) {
+              .container {
+                width: 750px;
+              }
+            }
+            @media (min-width: 992px) {
+              .container {
+                width: 970px;
+              }
+            }
+            @media (min-width: 1200px) {
+              .container {
+                width: 1170px;
+              }
+            }
+            input,select {
+                margin-bottom: 1em;
+            }
+        </style>
+    </noscript>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <noscript>
+                <div class="container">
+            <h1>Filehole</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="url_len">URL Length (5-169)</label>
+                <input type="number" name="url_len" id="url_len" min=5 max=169 value=24 /><br>
+                <label for="expiry">Expiry</label>
+                <select name="expiry" id="expiry">
+                    <option value="3600">1 hour</option>
+                    <option value="18000">5 hours</option>
+                    <option value="86400" selected>1 day</option>
+                    <option value="140400">39 hours</option>
+                    <option value="172800">2 days</option>
+                    <option value="248400">69 hours</option>
+                    <option value="432000">5 days</option>
+                </select><br>
+                <input type="file" name="file" />
+                <input type="submit" />
+            </form>
+            <hr>
+	   <h1>How to put your files in the hole</h1>
+            <h2>curl</h2>
+            <p><pre>curl -X POST -F 'file=@filehole.png' https://filehole.org</pre></p>
+            <p><pre>curl -X POST -F 'file=@filehole.png' -F "url_len=5" -F "expiry=86400" https://filehole.org</pre></p>
+            <h2>Firefox</h2>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/post-image/">POST Image by rj1</a>
+	   <h2>Mac OS</h2>
+	   <a href="https://github.com/AndroidKitKat/Filehole.org-Mac">Filehole.org-Mac by AndroidKitKat</a>*
+	   <p><small>*not actually tested or endorsed because I will never own a Mac</small></p>
+        </div>
+    </noscript>
+    
   </body>
 </html>
