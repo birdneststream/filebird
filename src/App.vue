@@ -1,13 +1,13 @@
 <template>
-  <div class="flex justify-center items-center h-screen">
-    <div class="bg-gray-900 p-6 rounded-md max-w-screen-lg w-2/6">
+  <div class="md:flex justify-center items-center h-screen mx-auto">
+    <div class="bg-gray-900 p-6 rounded-md  md:w-2/6">
       <h2 class="text-lg font-medium text-gray-300 mb-4">Filehole.org</h2>
 
-      <div class="flex flex-col space-y-4">
+      <div class="flex flex-col md:space-y-4">
         <label
           for="file-upload"
           :disabled="uploading"
-          class="cursor-pointer flex items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-300 py-3 px-4 text-sm font-medium text-gray-300 max-w-screen-lg w-full"
+          class="cursor-pointer flex items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-300 py-3 px-4 text-sm font-medium text-gray-300 w-full"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,20 +28,20 @@
         <div class="flex flex-col">
           <button
             :disabled="uploading || !this.files.length"
-            class="max-w-screen-lg w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 rounded-t text-sm font-medium text-gray-300 disabled:bg-blue-950"
+            class="w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 rounded-t text-sm font-medium text-gray-300 disabled:bg-blue-950"
             @click="uploadFiles()"
           >
             {{ uploading ? 'Uploading...' : 'Upload' }}
           </button>
           <button
             :disabled="uploading"
-            :class="`max-w-screen-lg w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 text-sm font-medium text-gray-300 disabled:bg-blue-950`"
+            :class="`w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 text-sm font-medium text-gray-300 disabled:bg-blue-950`"
             @click="resetState()"
           >
             Clear
           </button>
           <button
-            class="max-w-screen-lg w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 rounded-b text-sm font-medium text-gray-300 disabled:bg-blue-950"
+            class="w-full bg-blue-500 hover:bg-blue-400 transition-colors duration-300 py-2 px-4 rounded-b text-sm font-medium text-gray-300 disabled:bg-blue-950"
             @click="state.showOptions = !state.showOptions"
           >
             Options
@@ -129,7 +129,7 @@
           <div
             v-for="(file, index) in state.uploaded"
             :key="index"
-            class="flex items-center justify-between bg-gray-800 rounded-md py-2 px-4 max-w-screen-lg w-full"
+            class="flex items-center justify-between bg-gray-800 rounded-md py-2 px-4 w-full"
           >
             <a
               :href="file.response"
